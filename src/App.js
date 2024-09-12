@@ -66,6 +66,7 @@ export default function WaitlistForm() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(formDataToSend),
+          mode: 'cors',
         }
       );
   
