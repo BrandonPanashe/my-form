@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AlertCircle } from 'lucide-react';
-
 const propertyTypes = [
   'Office', 'Retail', 'Industrial', 'Multifamily', 'Hotel', 'Mixed Use', 'Special Purpose', 'Other'
 ];
@@ -11,7 +10,6 @@ const states = [
   'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
   'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
 ];
-
 export default function WaitlistForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -27,7 +25,6 @@ export default function WaitlistForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === 'checkbox') {
@@ -45,44 +42,31 @@ export default function WaitlistForm() {
       setFormData(prevData => ({ ...prevData, [name]: value }));
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage('');
-  
+    // Prepare the data for submission
     const formDataToSend = {
       ...formData,
       propertyTypes: formData.propertyTypes.join(', '),
       states: formData.states.join(', ')
     };
-  
     try {
       const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbwWbK9yZuOEH6cba13O27kVVM6OGWBFFpTFWLQUiVVCbATxIg95ADin1kB-VcRhlY6JTQ/exec',
+        'https://script.google.com/macros/s/AKfycbwbOxGRE9xkvmLzBriPV8dW3oGjm1sA2T1FhcEmHbDkyEvEUC2b5jitM8sTX8qzSI1X/exec',
         {
           method: 'POST',
+          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(formDataToSend),
-          mode: 'cors',
         }
       );
-  
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-  
-      const result = await response.json(); // Now using the result
-       // Use the result here if needed, for example:
-    console.log(result); // This is just an example to ensure the variable is used
-  
-      // Process the result as needed
       setSubmitMessage('Thank you for joining our waitlist!');
-      // Optionally, you can use the result here if needed
-      // Example: if (result.success) { ... }
-  
+      // Optionally reset the form here
+      // setFormData({ ... }); // Reset to initial state
     } catch (error) {
       console.error('Error:', error);
       setSubmitMessage('An error occurred. Please try again later.');
@@ -90,9 +74,6 @@ export default function WaitlistForm() {
       setIsSubmitting(false);
     }
   };
-  
-  
-  
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#e1672d' }}>
       <div className="max-w-md w-full space-y-8 bg-white p-6 sm:p-8 rounded-xl shadow-2xl">
@@ -254,6 +235,3 @@ export default function WaitlistForm() {
     </div>
   );
 }
-
-
-
