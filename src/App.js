@@ -42,19 +42,21 @@ export default function WaitlistForm() {
       setFormData(prevData => ({ ...prevData, [name]: value }));
     }
   };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage('');
-    // Prepare the data for submission
+  
     const formDataToSend = {
       ...formData,
       propertyTypes: formData.propertyTypes.join(', '),
       states: formData.states.join(', ')
     };
+  
     try {
       const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbwbOxGRE9xkvmLzBriPV8dW3oGjm1sA2T1FhcEmHbDkyEvEUC2b5jitM8sTX8qzSI1X/exec',
+        'https://script.google.com/macros/s/AKfycbx5Lwjk13eRSADCAf3xoN_BIwcX_aQecQm3uvZtSiYNmyYDjS2JkUv87-xVVMw7BvCjPQ/exec',
         {
           method: 'POST',
           mode: 'no-cors',
@@ -64,6 +66,7 @@ export default function WaitlistForm() {
           body: JSON.stringify(formDataToSend),
         }
       );
+      
       setSubmitMessage('Thank you for joining our waitlist!');
       // Optionally reset the form here
       // setFormData({ ... }); // Reset to initial state
