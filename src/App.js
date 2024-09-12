@@ -58,17 +58,6 @@ export default function WaitlistForm() {
     };
 
     try {
-      const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbwWbK9yZuOEH6cba13O27kVVM6OGWBFFpTFWLQUiVVCbATxIg95ADin1kB-VcRhlY6JTQ/exec',
-        {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formDataToSend),
-        }
-      );
 
       setSubmitMessage('Thank you for joining our waitlist!');
       // Optionally reset the form here
