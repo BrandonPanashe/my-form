@@ -74,6 +74,8 @@ export default function WaitlistForm() {
       }
   
       const result = await response.json(); // Now using the result
+       // Use the result here if needed, for example:
+    console.log(result); // This is just an example to ensure the variable is used
   
       // Process the result as needed
       setSubmitMessage('Thank you for joining our waitlist!');
