@@ -59,7 +59,7 @@ export default function WaitlistForm() {
   
     try {
       const response = await fetch(
-        'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL',
+        'https://script.google.com/macros/s/AKfycbwWbK9yZuOEH6cba13O27kVVM6OGWBFFpTFWLQUiVVCbATxIg95ADin1kB-VcRhlY6JTQ/exec',
         {
           method: 'POST',
           headers: {
