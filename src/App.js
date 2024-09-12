@@ -73,9 +73,13 @@ export default function WaitlistForm() {
         throw new Error('Network response was not ok');
       }
   
-      const result = await response.json(); // Use this if you need to handle the response
+      const result = await response.json(); // Now using the result
   
+      // Process the result as needed
       setSubmitMessage('Thank you for joining our waitlist!');
+      // Optionally, you can use the result here if needed
+      // Example: if (result.success) { ... }
+  
     } catch (error) {
       console.error('Error:', error);
       setSubmitMessage('An error occurred. Please try again later.');
@@ -83,6 +87,7 @@ export default function WaitlistForm() {
       setIsSubmitting(false);
     }
   };
+  
   
   
   return (
