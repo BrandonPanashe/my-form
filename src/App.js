@@ -50,18 +50,32 @@ export default function WaitlistForm() {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage('');
-
+  
     const formDataToSend = {
       ...formData,
       propertyTypes: formData.propertyTypes.join(', '),
       states: formData.states.join(', ')
     };
-
+  
     try {
-
+      const response = await fetch(
+        'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formDataToSend),
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const result = await response.json(); // Use this if you need to handle the response
+  
       setSubmitMessage('Thank you for joining our waitlist!');
-      // Optionally reset the form here
-      // setFormData({ ... }); // Reset to initial state
     } catch (error) {
       console.error('Error:', error);
       setSubmitMessage('An error occurred. Please try again later.');
@@ -69,6 +83,7 @@ export default function WaitlistForm() {
       setIsSubmitting(false);
     }
   };
+  
   
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#e1672d' }}>
